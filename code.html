@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylitto Cases — Эксклюзивные чехлы</title>
+    
+    <!-- Подключаем красивые шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050b18; /* Глубокий синий фон */
+            --bg-card: #0b152d; /* Цвет карточек */
+            --accent-blue: #38bdf8; /* Голубое свечение */
+            --silver: #e2e8f0; /* Серебряный текст */
+            --white: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            line-height: 1.6;
+        }
+
+        /* Оболочка под мобильный формат (как в твоем примере) */
+        .container {
+            width: 100%;
+            max-width: 450px;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            position: relative;
+            padding-bottom: 50px;
+            border-left: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+        }
+
+        /* --- ШАПКА И ЛОГОТИП --- */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .logo-box {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--white), #1e3a8a);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 32px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 11px;
+            color: var(--silver);
+            letter-spacing: 3px;
+            margin-top: 5px;
+        }
+
+        /* --- БЛОК СТОРИС (КАТЕГОРИИ) --- */
+        .stories-container {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding: 10px 20px 20px;
+            scrollbar-width: none;
+        }
+        .stories-container::-webkit-scrollbar { display: none; }
+
+        .story-item {
+            flex-shrink: 0;
+            width: 75px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .story-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            padding: 2px;
+            background: var(--glass-border);
+            margin-bottom: 8px;
+            transition: 0.3s;
+        }
+
+        .story-item.active .story-circle {
+            background: linear-gradient(135deg, var(--white), var(--accent-blue));
+            box-shadow: 0 0 10px var(--accent-blue);
+        }
+
+        .story-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .story-item span {
+            font-size: 10px;
+            color: var(--silver);
+        }
+
+        /* --- КАРТОЧКА ТОВАРА --- */
+        .product-display {
+            padding: 0 20px;
+        }
+
+        .main-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 25px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .image-holder {
+            width: 100%;
+            height: 300px;
+            background: #fff;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Чтобы чехол был виден полностью */
+        }
+
+        .card-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .card-info p {
+            font-size: 13px;
+            color: var(--silver);
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: block;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3a8a, #050b18);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid var(--accent-blue);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        /* --- ПРАЙС-ЛИСТ --- */
+        .price-section {
+            padding: 40px 20px;
+        }
+
+        .price-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 24px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid var(--glass-border);
+            font-size: 14px;
+        }
+
+        .price-row span:last-child {
+            color: var(--accent-blue);
+            font-weight: 600;
+        }
+
+        /* --- QR-КОДЫ И СОЦСЕТИ --- */
+        .socials {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .qr-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .qr-item {
+            width: 120px;
+            background: white;
+            padding: 10px;
+            border-radius: 15px;
+        }
+
+        .qr-item img {
+            width: 100%;
+        }
+
+        .qr-item p {
+            color: black;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Шапка -->
+        <header class="header">
+            <div class="logo-box">
+                <!-- ДОБАВИТЬ ФОТО: Твой логотип -->
+                <img src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/0144c577abeb4689acb4eed28507201a635084449450a05f.jpg" alt="Aylitto Logo">
+            </div>
+            <h1>Aylitto Cases</h1>
+            <p>Эксклюзив ручной работы</p>
+        </header>
+
+        <!-- Категории (Сторис) -->
+        <div class="stories-container">
+            <div class="story-item active" onclick="changeContent(0)">
+                <div class="story-circle">
+                    <!-- ДОБАВИТЬ ФОТО: Иконка категории Флаги -->
+                    <img src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg">
+                </div>
+                <span>Флаги</span>
+            </div>
+            <div class="story-item" onclick="changeContent(1)">
+                <div class="story-circle">
+                    <!-- ДОБАВИТЬ ФОТО: Иконка категории Имена -->
+                    <img src="https://unlimbot-02.hb.ru-msk.vkcloud-storage.ru/uploads/7c69c7975e7e406d915fdf7c09c75d6bed2191c2eaaea26d.jpg">
+                </div>
+                <span>Имена</span>
+            </div>
+            <div class="story-item" onclick="changeContent(2)">
+                <div class="story-circle">
+                    <!-- ДОБАВИТЬ ФОТО: Иконка категории Микс -->
+                    <img src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/13f6051c52b047dca001ee3a51fed32b86a6e71b1326f397.jpg">
+                </div>
+                <span>Флаг+Имя</span>
+            </div>
+        </div>
+
+        <!-- Главная карточка (меняется при клике на сторис) -->
+        <section class="product-display">
+            <div class="main-card" id="main-card">
+                <div class="image-holder">
+                    <!-- ДОБАВИТЬ ФОТО: Главное фото товара (будет меняться) -->
+                    <img id="product-img" src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg">
+                </div>
+                <div class="card-info">
+                    <h2 id="product-title">Чехол с флагом</h2>
+                    <p id="product-desc">Инкрустация стразами флага любой страны. Ручная работа, премиальное качество.</p>
+                    <a href="https://t.me/твой_ник" class="btn">Заказать в Telegram ✨</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Прайс-лист -->
+        <section class="price-section">
+            <h2 class="price-title">Стоимость</h2>
+            <div class="price-row"><span>Чехол с дизайном</span><span>от 1000 ₽</span></div>
+            <div class="price-row"><span>Чехол с именем</span><span>от 1200 ₽</span></div>
+            <div class="price-row"><span>Чехол с 1 флагом</span><span>1500 ₽</span></div>
+            <div class="price-row"><span>Флаг + имя</span><span>1700 ₽</span></div>
+        </section>
+
+        <!-- QR-коды -->
+        <section class="socials">
+            <h2 class="price-title">Мы в соцсетях</h2>
+            <div class="qr-grid">
+                <div class="qr-item">
+                    <!-- ДОБАВИТЬ ФОТО: Твой QR инстаграма -->
+                    <img src="https://unlimbot-02.hb.ru-msk.vkcloud-storage.ru/uploads/7c69c7975e7e406d915fdf7c09c75d6bed2191c2eaaea26d.jpg" alt="Instagram">
+                    <p>INSTAGRAM</p>
+                </div>
+                <div class="qr-item">
+                    <!-- ДОБАВИТЬ ФОТО: Твой QR тикток -->
+                    <img src="https://unlimbot-02.hb.ru-msk.vkcloud-storage.ru/uploads/258b29ba942a486db5fca50dfbc4de2109c67aaf3b637e6d.jpg" alt="TikTok">
+                    <p>TIKTOK</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Данные для смены контента
+        const products = [
+            {
+                title: "Чехол с флагом",
+                desc: "Инкрустация стразами флага любой страны. Ручная работа, премиальное качество.",
+                img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg"
+            },
+            {
+                title: "Чехол с именем",
+                desc: "Любое имя или надпись из сияющих страз. Сделай свой телефон уникальным.",
+                img: "https://unlimbot-02.hb.ru-msk.vkcloud-storage.ru/uploads/7c69c7975e7e406d915fdf7c09c75d6bed2191c2eaaea26d.jpg"
+            },
+            {
+                title: "Флаг + Имя",
+                desc: "Комбо дизайн: ваш флаг и имя на одном чехле. Самый популярный выбор!",
+                img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/13f6051c52b047dca001ee3a51fed32b86a6e71b1326f397.jpg"
+            }
+        ];
+
+        function changeContent(index) {
+            // Убираем активный класс у всех сторис
+            const stories = document.querySelectorAll('.story-item');
+            stories.forEach(s => s.classList.remove('active'));
+            
+            // Добавляем активный класс нажатой сторис
+            stories[index].classList.add('active');
+
+            // Меняем контент в карточке
+            document.getElementById('product-title').innerText = products[index].title;
+            document.getElementById('product-desc').innerText = products[index].desc;
+            document.getElementById('product-img').src = products[index].img;
+            
+            // Сброс анимации, чтобы она проигралась снова
+            const card = document.getElementById('main-card');
+            card.style.animation = 'none';
+            card.offsetHeight; 
+            card.style.animation = null;
+        }
+    </script>
+</body>
+</html>

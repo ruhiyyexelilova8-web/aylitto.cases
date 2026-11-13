@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylitto Cases — Эксклюзивные чехлы со стразами</title>
+    
+    <!-- Подключаем шрифты -->
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050b18; /* Глубокий синий фон */
+            --bg-card: #0b152d; /* Цвет карточек */
+            --accent-blue: #38bdf8; /* Голубое свечение */
+            --silver: #e2e8f0; /* Серебряный текст */
+            --white: #ffffff;
+            --glass-border: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* Мобильный контейнер */
+        .container {
+            width: 100%;
+            max-width: 480px;
+            min-height: 100vh;
+            background: var(--bg-dark);
+            position: relative;
+            padding-bottom: 60px;
+            border-left: 1px solid var(--glass-border);
+            border-right: 1px solid var(--glass-border);
+        }
+
+        /* ШАПКА */
+        .header {
+            text-align: center;
+            padding: 35px 20px 15px;
+        }
+
+        .logo-box {
+            width: 110px;
+            height: 110px;
+            margin: 0 auto 12px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--white), #1e3a8a);
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.3);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .header h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .header p {
+            font-size: 11px;
+            color: var(--silver);
+            letter-spacing: 3px;
+            margin-top: 4px;
+        }
+
+        /* СТОРИС (20 КАТЕГОРИЙ ФЛАГОВ) */
+        .stories-wrapper {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--glass-border);
+            border-top: 1px solid var(--glass-border);
+            background: rgba(11, 21, 45, 0.4);
+        }
+
+        .section-hint {
+            font-size: 11px;
+            color: var(--silver);
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .stories-container {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 0 20px;
+            scrollbar-width: none; /* Скрыть скроллбар в Firefox */
+        }
+        .stories-container::-webkit-scrollbar { display: none; /* Скрыть в Chrome/Safari */ }
+
+        .story-item {
+            flex-shrink: 0;
+            width: 70px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .story-circle {
+            width: 66px;
+            height: 66px;
+            border-radius: 50%;
+            padding: 2px;
+            background: var(--glass-border);
+            margin-bottom: 6px;
+            transition: 0.3s;
+        }
+
+        .story-item.active .story-circle {
+            background: linear-gradient(135deg, var(--white), var(--accent-blue));
+            box-shadow: 0 0 12px var(--accent-blue);
+        }
+
+        .story-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .story-label {
+            font-size: 10px;
+            color: var(--silver);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            width: 100%;
+        }
+
+        .story-item.active .story-label {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* ГЛАВНАЯ КАРТОЧКА ТОВАРА */
+        .product-display {
+            padding: 25px 20px;
+        }
+
+        .main-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-holder {
+            width: 100%;
+            height: 320px;
+            background: #ffffff;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+
+        .image-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 10px;
+        }
+
+        .card-info h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .card-info p {
+            font-size: 13px;
+            color: var(--silver);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .btn {
+            display: block;
+            background: linear-gradient(135deg, #1e3a8a, #0b152d);
+            color: white;
+            text-decoration: none;
+            padding: 15px;
+            border-radius: 14px;
+            border: 1px solid var(--accent-blue);
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 20px var(--accent-blue);
+        }
+
+        /* ПРАЙС-ЛИСТ */
+        .price-section {
+            padding: 10px 20px 30px;
+        }
+
+        .price-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            margin-bottom: 8px;
+            font-size: 13px;
+        }
+
+        .price-row span:last-child {
+            color: var(--accent-blue);
+            font-weight: 600;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- ШАПКА И ЛОГОТИП -->
+        <header class="header">
+            <div class="logo-box">
+                <!-- ДОБАВИТЬ КАРТИНКУ: Ссылка на твой логотип -->
+                <img src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/0144c577abeb4689acb4eed28507201a635084449450a05f.jpg" alt="Aylitto Logo">
+            </div>
+            <h1>Aylitto Cases</h1>
+            <p>Твой флаг — твоя история ✨</p>
+        </header>
+
+        <!-- ЛЕНТА СТОРИС (20 КАТЕГОРИЙ) -->
+        <div class="stories-wrapper">
+            <div class="section-hint">Нажми на флаг, чтобы посмотреть дизайн →</div>
+            <div class="stories-container" id="stories-list">
+                <!-- Сюда JavaScript автоматически добавит все 20 кружков -->
+            </div>
+        </div>
+
+        <!-- ГЛАВНАЯ КАРТОЧКА (меняется при клике на флаг) -->
+        <section class="product-display">
+            <div class="main-card" id="main-card">
+                <div class="image-holder">
+                    <!-- ДОБАВИТЬ КАРТИНКУ: Главное фото чехла (динамическое) -->
+                    <img id="product-img" src="https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" alt="Чехол со стразами">
+                </div>
+                <div class="card-info">
+                    <h2 id="product-title">Чехол с флагом Азербайджана</h2>
+                    <p id="product-desc">Ручная ювелирная инкрустация премиальными кристаллами. Идеальное качество и сияние.</p>
+                    <!-- Замени ссылку https://t.me/твой_ник на свой телеграм -->
+                    <a href="https://t.me/твой_ник" class="btn" target="_blank">Заказать этот чехол ✨</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ПРАЙС-ЛИСТ -->
+        <section class="price-section">
+            <h2 class="price-title">Прайс-лист</h2>
+            <div class="price-row"><span>Чехол с дизайном</span><span>от 1000 ₽</span></div>
+            <div class="price-row"><span>Чехол с именем</span><span>от 1200 ₽</span></div>
+            <div class="price-row"><span>Чехол с 1 флагом</span><span>1500 ₽</span></div>
+            <div class="price-row"><span>Флаг + Имя</span><span>1700 ₽</span></div>
+            <div class="price-row"><span>Сложный / Инд. дизайн</span><span>от 1600 ₽</span></div>
+        </section>
+
+    </div>
+
+    <script>
+        // СПИСОК ИЗ 20 КАТЕГОРИЙ (Флаги и народы)
+        // В поле "img" ты можешь менять ссылки на нужные фотографии чехлов для каждого флага
+        const categories = [
+            { label: "Азербайджан", title: "Флаг Азербайджана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Грузия", title: "Флаг Грузии", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Дагестан", title: "Флаг Дагестана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Армения", title: "Флаг Армении", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Чечня", title: "Флаг Чечни", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Ингушетия", title: "Флаг Ингушетии", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Осетия", title: "Флаг Осетии", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Адыгея", title: "Флаг Адыгеи", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Россия", title: "Флаг России", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Турция", title: "Флаг Турции", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Казахстан", title: "Флаг Казахстана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Узбекистан", title: "Флаг Узбекистана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Кыргызстан", title: "Флаг Кыргызстана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Таджикистан", title: "Флаг Таджикистана", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Израиль", title: "Флаг Израиля", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Греция", title: "Флаг Греции", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Франция", title: "Флаг Франции", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Германия", title: "Флаг Германии", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "Италия", title: "Флаг Италии", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" },
+            { label: "США", title: "Флаг США", img: "https://unlimbot.hb.ru-msk.vkcloud-storage.ru/uploads/4f51a9a6bbc04fdeab49aa40b4daeaf68ced78c3b2c89edf.jpg" }
+        ];
+
+        const storiesContainer = document.getElementById('stories-list');
+
+        // Автоматически создаем 20 кружков на экране
+        categories.forEach((cat, index) => {
+            const item = document.createElement('div');
+            item.className = `story-item ${index === 0 ? 'active' : ''}`;
+            item.onclick = () => selectCategory(index);
+            item.innerHTML = `
+                <div class="story-circle">
+                    <!-- ДОБАВИТЬ КАРТИНКУ: Картинка для кружка сторис -->
+                    <img src="${cat.img}" alt="${cat.label}">
+                </div>
+                <span class="story-label">${cat.label}</span>
+            `;
+            storiesContainer.appendChild(item);
+        });
+
+        // Функция переключения при клике на кружок
+        function selectCategory(index) {
+            document.querySelectorAll('.story-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            const data = categories[index];
+            document.getElementById('product-title').innerText = data.title;
+            document.getElementById('product-img').src = data.img;
+            document.getElementById('product-desc').innerText = `Ручная работа. Эксклюзивный чехол с символикой (${data.label}) из премиальных страз.`;
+        }
+    </script>
+</body>
+</html>

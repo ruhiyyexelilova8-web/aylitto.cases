@@ -1,0 +1,1582 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aylitto Cases — Эксклюзивные чехлы со стразами</title>
+    
+    <!-- Подключение элегантных шрифтов -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050b18;       /* Глубокий синий */
+            --bg-card: #0b152d;       /* Темно-синий карточек */
+            --accent-blue: #38bdf8;   /* Неоново-голубой акцент */
+            --silver: #cbd5e1;        /* Серебряный оттенок */
+            --white: #ffffff;
+            --glass-border: rgba(226, 232, 240, 0.15);
+            --border-glow: rgba(56, 189, 248, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Главный адаптивный контейнер */
+        .site-container {
+            width: 100%;
+            max-width: 1100px; /* На ПК расширяется до 1100px */
+            padding: 20px;
+            margin: 0 auto;
+        }
+
+        /* --- ШАПКА И ЛОГОТИП --- */
+        .header {
+            text-align: center;
+            padding: 20px 0 30px;
+        }
+
+        .logo-box {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--white), #1e3a8a);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.35);
+            transition: transform 0.3s ease;
+        }
+
+        .logo-box:hover {
+            transform: scale(1.03);
+        }
+
+        .logo-box img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .brand-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            text-shadow: 0 0 15px rgba(255,255,255,0.2);
+        }
+
+        .brand-tagline {
+            font-size: 13px;
+            color: var(--silver);
+            letter-spacing: 3px;
+            margin-top: 6px;
+            text-transform: uppercase;
+        }
+
+        /* --- ПЛАВНАЯ ЛЕНТА СТОРИС (КАРУСЕЛЬ) --- */
+        .stories-section {
+            background: rgba(11, 21, 45, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 35px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stories-title {
+            font-size: 12px;
+            color: var(--silver);
+            text-align: center;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Очень плавная прокрутка с доводкой (Scroll Snap) */
+        .stories-container {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 10px;
+        }
+
+        /* Скрываем стандартную полосу прокрутки */
+        .stories-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        .stories-container::-webkit-scrollbar-thumb {
+            background: var(--glass-border);
+            border-radius: 10px;
+        }
+
+        .story-item {
+            flex-shrink: 0;
+            width: 76px;
+            text-align: center;
+            cursor: pointer;
+            scroll-snap-align: start;
+            transition: all 0.3s ease;
+        }
+
+        .story-circle {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            padding: 3px;
+            background: var(--glass-border);
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .story-item:hover .story-circle {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+        }
+
+        .story-item.active .story-circle {
+            background: linear-gradient(135deg, var(--white), var(--accent-blue));
+            box-shadow: 0 0 15px var(--accent-blue);
+        }
+
+        .story-circle img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .story-label {
+            font-size: 11px;
+            color: var(--silver);
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            display: block;
+            width: 100%;
+        }
+
+        .story-item.active .story-label {
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        /* --- ГЛАВНЫЙ БЛОК ТОВАРА И ПРАЙСА --- */
+        /* На телефонах — колонкой, на ПК — 2 колонки рядом */
+        .main-content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        /* Стили карточки чехла */
+        .product-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 24px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
+        }
+
+        .image-container {
+            width: 100%;
+            height: 380px;
+            background:(var(--bg-card)) ;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .image-container img {
+            transform: scale(1.03);
+        }
+
+        .product-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 30px;
+            margin-bottom: 10px;
+            color: var(--white);
+        }
+
+        .product-desc {
+            font-size: 14px;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .btn-order {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #1d3557, #0b152d);
+            border: 1px solid var(--border-glow);
+            color: var(--white);
+            padding: 16px 24px;
+            border-radius: 16px;
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .btn-order:hover {
+            background: linear-gradient(135deg, #254374, #111e3f);
+            border-color: var(--white);
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Прайс-лист */
+        .info-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .price-card {
+            background: var(--bg-card);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 24px;
+        }
+
+        .section-h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 26px;
+            margin-bottom: 18px;
+            color: var(--white);
+        }
+
+        .price-table {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+        }
+
+        .price-name {
+            font-size: 14px;
+            color: var(--white);
+        }
+
+        .price-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-blue);
+
+
+
+        
+
+}
+
+@keyframes sparkleShine {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.5) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(90deg);
+    }
+}
+
+
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.4); }
+}
+
+        /* --- АДАПТИВНОСТЬ ДЛЯ ПК (Экран больше 768px) --- */
+        @media (min-width: 768px) {
+            .site-container {
+                padding: 40px 20px;
+            }
+
+            .header {
+                padding: 10px 0 40px;
+            }
+
+            .brand-title {
+                font-size: 48px;
+            }
+
+            /* На компьютере сетка делится на 2 красивых колонки */
+            .main-content-grid {
+                grid-template-columns: 1.1fr 0.9fr;
+                align-items: start;
+            }
+
+            .image-container {
+                height: 440px;
+            }
+
+            .stories-container {
+                justify-content: flex-start;
+            }
+        }
+
+        .craft-care-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: #e2e8f0;
+  font-family: inherit; /* Подхватит шрифт твоего сайта */
+}
+
+/* Кнопки-вкладки */
+.tabs-header {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.tab-btn {
+  background: rgba(16, 28, 48, 0.65);
+  border: 1px solid rgba(110, 168, 254, 0.3);
+  color: #cbd5e1;
+  padding: 12px 26px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  border-color: rgba(110, 168, 254, 0.7);
+  color: #ffffff;
+}
+
+/* Активная кнопка с эффектом свечения, как у твоей кнопки Telegram */
+.tab-btn.active {
+  background: rgba(28, 49, 82, 0.85);
+  border-color: #7dd3fc;
+  color:  rgba(253, 253, 253, 0.4);
+  box-shadow: 0 0 18px rgba(125, 211, 252, 0.25), inset 0 0 10px rgba(125, 211, 252, 0.15);
+}
+
+/* Анимация появления вкладок */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Сетка для 3 карточек «Как это сделано» */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Стеклянные карточки в стиле твоего сайта */
+.info-card, .care-box {
+  background: linear-gradient(145deg, rgba(18, 30, 52, 0.75), rgba(10, 18, 34, 0.85));
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  border-radius: 20px;
+  padding: 24px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 0 20px rgba(125, 211, 252, 0.04);
+  position: relative;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.info-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(125, 211, 252, 0.5);
+}
+
+.step-badge {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #7dd3fc;
+  background: rgba(125, 211, 252, 0.12);
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(125, 211, 252, 0.25);
+}
+
+.step-img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: #0f172a; /* Фон, пока фото не загружено */
+}
+
+.info-card h3, .care-box h3 {
+  color: #ffffff;
+  font-size: 19px;
+  margin: 0 0 10px 0;
+  font-weight: 600;
+}
+
+.info-card p {
+  color: #94a3b8;
+  font-size: 14.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Стили для вкладки «Уход» */
+.care-box {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+}
+
+.care-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.care-list li {
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.55;
+  padding-left: 24px;
+  position: relative;
+}
+
+.care-list li::before {
+  content: "✦";
+  color: #7dd3fc;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.care-list strong {
+  color: #ffffff;
+}
+
+
+
+
+.catalog-section{
+    width:90%;
+    margin:90px auto;
+    padding:45px;
+    border-radius:28px;
+    background:rgba(18,24,40,.75);
+    border:1px solid rgba(120,180,255,.25);
+    backdrop-filter:blur(12px);
+    box-shadow:0 0 30px rgba(70,150,255,.08);
+}
+
+.catalog-header{
+    text-align:center;
+    margin-bottom:45px;
+}
+
+.catalog-header h2{
+    font-size:42px;
+    color:#F6E5B8;
+    margin-bottom:10px;
+}
+
+.catalog-header p{
+    color:#d4d7e3;
+    font-size:18px;
+}
+
+.filters {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+    align-items: stretch;
+}
+
+.filter-card {
+    min-width: 0;
+    box-sizing: border-box;
+    background: rgba(28, 35, 55, 0.85);
+    border: 1px solid rgba(130, 190, 255, 0.3);
+    border-radius: 20px;
+    padding: 20px 15px;
+    transition: 0.35s;
+    
+    margin-top: 50px;
+}
+
+
+.filter-card h3 {
+    color: #fcfcfc;
+    font-size: 17px;
+    margin-bottom: 18px;
+}
+
+.filter-card select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 8px;
+    border-radius: 12px;
+    background: #131c2d;
+    border: 1px solid rgba(130, 190, 255, 0.25);
+    color: white;
+    font-size: 14px;
+}
+
+.filter-card:hover {
+    transform: translateY(-5px);
+    border-color: #539dbf;
+    box-shadow: 0 0 20px rgba(84, 170, 255, 0.18);
+}
+.catalog-section {
+    margin-top: 50px;
+}
+/* На небольших экранах */
+@media (max-width: 900px) {
+    .filters {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 500px) {
+    .filters {
+        grid-template-columns: 1fr;
+    }
+
+.filter-card h3{
+    color:#F6E5B8;
+    margin-bottom:18px;
+    font-size:20px;
+}
+
+.filter-card select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    background:#131c2d;
+    border:1px solid rgba(255,255,255,.08);
+    color:white;
+    outline:none;
+    font-size:15px;
+}
+
+.catalog-btn{
+    display:block;
+    margin:45px auto 0;
+    padding:18px 55px;
+    font-size:18px;
+    border:none;
+    border-radius:18px;
+    cursor:pointer;
+    color:#ffffff;
+    background:linear-gradient(90deg,#3ca9ff,#7ee7ff);
+    transition:.35s;
+    box-shadow:0 0 25px rgba(70,170,255,.3);
+}
+
+.catalog-btn:hover{
+    transform:scale(1.04);
+    box-shadow:0 0 35px rgba(70,170,255,.55);
+}
+
+}
+
+
+/* ===== CREATION PROCESS ===== */
+
+.creation-section {
+    width: 90%;
+    max-width: 1400px;
+    margin: 85px auto;
+    position: relative;
+}
+
+/* Заголовок */
+
+.creation-header {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.creation-label {
+    display: inline-block;
+    color: #86ddff;
+    font-size: 11px;
+    letter-spacing: 5px;
+    margin-bottom: 16px;
+}
+
+.creation-header h2 {
+    color: #f6f6f6;
+    font-size: clamp(27px, 3vw, 40px);
+    font-family: Georgia, serif;
+    font-weight: 500;
+    margin: 0 0 16px;
+}
+
+.creation-header p {
+    color: #d2d4d8;
+    font-size: 15px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Карточки */
+
+.creation-steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.creation-card {
+    position: relative;
+    overflow: hidden;
+    padding: 32px 23px 25px;
+    min-height: 255px;
+    box-sizing: border-box;
+
+    background: linear-gradient(
+        145deg,
+        rgba(49, 65, 94, 0.76),
+        rgba(15, 23, 40, 0.88)
+    );
+
+    border: 1px solid rgba(126, 199, 255, 0.28);
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Номер этапа */
+
+.creation-number {
+    position: absolute;
+    top: 17px;
+    right: 18px;
+
+    color: #8be2ff;
+    font-size: 12px;
+    letter-spacing: 1px;
+
+    background: rgba(105, 202, 255, 0.09);
+    border: 1px solid rgba(120, 216, 255, 0.25);
+    border-radius: 20px;
+
+    padding: 6px 10px;
+}
+
+/* Декоративный символ */
+
+.creation-icon {
+    font-size: 37px;
+    color: #fafafa;
+
+    margin: 15px 0 20px;
+
+    text-shadow:
+        0 0 12px rgba(246, 229, 184, 0.35),
+        0 0 28px rgba(102, 204, 255, 0.2);
+
+    transition: transform 0.35s ease;
+}
+
+/* Заголовки карточек */
+
+.creation-card h3 {
+    color: #fefefe;
+    font-size: 19px;
+    font-weight: 500;
+    margin: 0 0 13px;
+}
+
+/* Описание */
+
+.creation-card p {
+    color: #d1d7e4;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 0 24px;
+}
+
+/* Подпись внизу */
+
+.creation-bottom {
+    display: block;
+
+    color: rgba(135, 218, 255, 0.75);
+    font-size: 9px;
+    letter-spacing: 3px;
+
+    padding-top: 15px;
+    border-top: 1px solid rgba(140, 190, 255, 0.15);
+}
+
+/* Свечение при наведении */
+
+.creation-card:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(122, 221, 255, 0.8);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.18),
+        0 0 24px rgba(76, 177, 255, 0.12);
+}
+
+.creation-card:hover .creation-icon {
+    transform: scale(1.12);
+}
+
+/* Нижняя подпись */
+
+.creation-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    margin-top: 32px;
+}
+
+.creation-footer span {
+    width: 55px;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(132, 211, 255, 0.65)
+    );
+}
+
+.creation-footer span:last-child {
+    transform: rotate(180deg);
+}
+
+.creation-footer p {
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 15px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Планшеты */
+
+@media (max-width: 1000px) {
+    .creation-steps {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* Телефоны */
+
+@media (max-width: 550px) {
+    .creation-section {
+        width: 92%;
+        margin: 60px auto;
+    }
+
+    .creation-header {
+        margin-bottom: 30px;
+    }
+
+    .creation-steps {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .creation-card {
+        min-height: auto;
+        padding: 25px 22px;
+    }
+
+    .creation-icon {
+        margin-top: 10px;
+    }
+
+    .creation-header p {
+        font-size: 14px;
+    }
+}
+
+
+
+
+
+
+
+
+
+/* ===== SOCIAL MEDIA CATALOG ===== */
+
+.social-section {
+    width: 90%;
+    max-width: 1200px;
+    margin: 90px auto;
+    position: relative;
+}
+
+/* Заголовок */
+
+.social-header {
+    text-align: center;
+    margin-bottom: 42px;
+}
+
+.social-label {
+    display: inline-block;
+    color: #86ddff;
+    font-size: 10px;
+    letter-spacing: 5px;
+    margin-bottom: 16px;
+}
+
+.social-header h2 {
+    color: #fdfdfd;
+    font-family: Georgia, serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 500;
+    margin: 0 0 15px;
+}
+
+.social-header p {
+    color: #c6ccda;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+/* Сетка карточек */
+
+.social-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* Карточки */
+
+.social-card {
+    min-width: 0;
+    min-height: 235px;
+    box-sizing: border-box;
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-decoration: none;
+
+    background: linear-gradient(
+        145deg,
+        rgba(43, 61, 91, 0.75),
+        rgba(13, 21, 38, 0.95)
+    );
+
+    border: 1px solid rgba(126, 199, 255, 0.25);
+    border-radius: 22px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transition:
+        transform 0.35s ease,
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
+}
+
+/* Иконки */
+
+.social-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+    font-size: 30px;
+
+    background: rgba(114, 195, 255, 0.09);
+    border: 1px solid rgba(134, 221, 255, 0.25);
+    border-radius: 15px;
+
+    margin-bottom: 22px;
+
+    text-shadow: 0 0 18px rgba(134, 221, 255, 0.4);
+    transition: transform 0.35s ease;
+}
+
+/* Названия */
+
+.social-name {
+    color: #f9f9f9;
+    font-family: Georgia, serif;
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+/* Описание */
+
+.social-card p {
+    color: #c6ccda;
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 0 0 22px;
+}
+
+/* Ссылка внизу */
+
+.social-link {
+    color: #86ddff;
+    font-size: 9px;
+    letter-spacing: 2px;
+    line-height: 1.8;
+    margin-top: auto;
+}
+
+/* Свечение при наведении */
+
+.social-card:hover {
+    transform: translateY(-7px);
+    border-color: rgba(134, 221, 255, 0.8);
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.2),
+        0 0 25px rgba(76, 177, 255, 0.13);
+}
+
+.social-card:hover .social-icon {
+    transform: scale(1.1);
+}
+
+/* Нижняя подпись */
+
+.social-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    margin-top: 35px;
+}
+
+.social-footer span {
+    width: 45px;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(132, 211, 255, 0.65)
+    );
+}
+
+.social-footer span:last-child {
+    transform: rotate(180deg);
+}
+
+.social-footer p {
+    color: #ffffff;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-style: italic;
+    text-align: center;
+}
+
+/* Планшеты */
+
+@media (max-width: 1000px) {
+    .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+    }
+}
+
+/* Телефоны */
+
+@media (max-width: 550px) {
+    .social-section {
+        width: 92%;
+        margin: 65px auto;
+    }
+
+    .social-header {
+        margin-bottom: 30px;
+    }
+
+    .social-header p {
+        font-size: 13px;
+    }
+
+    .social-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+
+    .social-card {
+        min-height: 205px;
+        padding: 24px;
+    }
+
+    .social-footer {
+        gap: 10px;
+    }
+
+    .social-footer span {
+        width: 25px;
+    }
+
+    .social-footer p {
+        font-size: 11px;
+    }
+}
+
+
+
+
+
+
+
+
+    </style>
+</head>
+<body>
+
+    <div class="site-container">
+        
+        <!-- ШАПКА -->
+        <header class="header">
+            <div class="logo-box">
+                <!-- ДОБАВИТЬ КАРТИНКУ: Ссылка на твой логотип -->
+                <img src="20.jpeg" alt="Aylitto Cases Logo">
+            </div>
+            <h1 class="brand-title">Aylitto Cases</h1>
+            <div class="brand-tagline">Твой флаг — твоя история ✨</div>
+        </header>
+
+        <!-- ПЛАВНАЯ ЛЕНТА КАТЕГОРИЙ (20 КРУЖКОВ) -->
+        <section class="stories-section">
+            <div class="stories-title">Выберите флаг или вариант дизайна →</div>
+            <div class="stories-container" id="stories-list">
+                <!-- JavaScript сгенерирует 20 категорий с плавной прокруткой -->
+            </div>
+        </section>
+
+        <!-- ОСНОВНОЙ КОНТЕНТ (АДАПТИВНЫЙ) -->
+        <div class="main-content-grid">
+            
+            <!-- Левая колонка на ПК (Карточка товара) -->
+            <div class="product-card" id="main-card">
+                <div class="image-container">
+                    <!-- ДОБАВИТЬ КАРТИНКУ: Фото чехла -->
+                    <img id="product-img" src="8.PNG" alt="Чехол со стразами">
+                </div>
+                <h2 class="product-title" id="product-title">Чехол с флагом Азербайджана</h2>
+                <p class="product-desc" id="product-desc">Инкрустация государственного флага из премиальных сияющих кристаллов. Каждая деталь выкладывается вручную под вашу модель телефона.</p>
+                
+                <!-- Замени ссылку https://t.me/твой_ник на свой реальный контакты в Telegram -->
+                <a href="https://t.me/ayliinkk7" target="_blank" class="btn-order">
+                    <span>Заказать этот чехол в Telegram</span>
+                    <span>✨</span>
+                </a>
+            </div>
+
+            <!-- Правая колонка на ПК (Прайс и детали) -->
+            <div class="info-panel">
+                <div class="price-card">
+                    <h2 class="section-h2">Актуальный прайс</h2>
+                    <div class="price-table">
+                        <div class="price-row">
+                            <span class="price-name"> Чехол с дизайном</span>
+                            <span class="price-val">от 999 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-name"> Чехол с именем</span>
+                            <span class="price-val">от 1100-1200 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-name"> Чехол с 1 флагом</span>
+                            <span class="price-val">1100-1200 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-name"> Флаг + Имя</span>
+                            <span class="price-val">1300 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-name"> Сложный / Индивидуальный</span>
+                            <span class="price-val">от 1600 ₽</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-name"> Доставка</span>
+                            <span class="price-val">200-300 ₽</span>
+                        </div>
+
+                        
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="info-card">
+            
+            <img src="18.jpeg" alt="Фиксация страз" class="step-img">
+            <h3>Двойная фиксация</h3>
+            <p>Используем профессиональный ювелирный клей, который не мутнеет со временем и надежно держит стразы даже при падениях.</p>
+          </div>
+        
+          <div class="info-card">
+            
+            
+            <h3>Огранка класса Lux</h3>
+            <p>Работаем только со стеклянными кристаллами высокой чистоты — они преломляют свет как бриллианты, а не тусклый пластик.</p>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="filters">
+
+            <div class="filter-card">
+                <h3>📱 Модель телефона</h3>
+                <select>
+                    <option>Делаем для любого телефона</option>
+
+                    
+                </select>
+            </div>
+        
+            <div class="filter-card">
+                <h3> Цвет</h3>
+                <select>
+                    <option>На ваше усмотрение</option>
+                    
+                </select>
+            </div>
+        
+            <div class="filter-card">
+                <h3> Тип кристаллов</h3>
+                <select>
+                    <option>Стеклянный</option>
+                    
+                </select>
+            </div>
+        
+            <div class="filter-card">
+                <h3> Стиль</h3>
+                <select>
+                    <option>Любой</option>
+                    
+                </select>
+            </div>
+        
+        </div>
+        
+        <section class="creation-section">
+
+            <div class="creation-header">
+                <span class="creation-label">AYLITTO CASES ✦</span>
+                <h2>Как создаётся твой чехол</h2>
+                <p>От первой идеи до последнего сияющего кристалла.</p>
+            </div>
+        
+            <div class="creation-steps">
+        
+                <div class="creation-card">
+                    
+                    <div class="creation-icon">✧</div>
+                    <h3>Твоя идея</h3>
+                    <p>
+                        Выбираем модель телефона, оттенки,
+                        кристаллы и детали будущего дизайна.
+                    </p>
+                    <span class="creation-bottom">YOUR IDEA</span>
+                </div>
+        
+                <div class=«creation-card»>
+                   
+                    <div class="creation-icon">◇</div>
+                    <h3>Подготовка</h3>
+                    <p>
+                        Подбираем материалы и тщательно
+                        продумываем каждую деталь оформления.
+                    </p>
+                    <span class="creation-bottom">THE DETAILS</span>
+                </div>
+        
+                <div class="creation-card">
+                    
+                    <div class="creation-icon">✦</div>
+                    <h3>Ручная работа</h3>
+                    <p>
+                        Каждый кристалл занимает своё место,
+                        создавая неповторимый блеск.
+                    </p>
+                    <span class=«creation-bottom»>HANDMADE</span>
+                </div>
+        
+                <div class=«creation-card»>
+                   
+                    <div class="creation-icon">♡</div>
+                    <h3>Твой шедевр</h3>
+                    <p>
+                        Проверяем готовый дизайн
+                        и бережно готовим заказ к отправке.
+                    </p>
+                    <span class="creation-bottom">AYLITTO CASES</span>
+                </div>
+        
+            </div>
+        
+            <div class=«creation-footer»>
+                <span></span>
+                <p>Каждая деталь имеет значение</p>
+                <span></span>
+            </div>
+        
+        </section>
+
+
+        <section class=«social-section»>
+
+            <div class="social-header">
+                <span class="social-label">FIND US ONLINE ✦</span>
+                <h2>Мы на связи</h2>
+                <p>Следи за нами, вдохновляйся и выбирай свой идеальный чехол.</p>
+            </div>
+        
+            <div class="social-grid">
+        
+                <a href="https://www.tiktok.com/@ayliwqw1?_r=1&_t=ZS-9BMmqqWFuPV"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-card tiktok-card">
+        
+                    <div class="social-icon">♪</div>
+                    <span class="social-name">TikTok</span>
+                    <p>Наши видео, новинки и красивые чехлы.</p>
+                    <span class="social-link">СМОТРЕТЬ ВИДЕО ↗</span>
+        
+                </a>
+        
+                <a href="https://www.instagram.com/aylwwynx1?psln=MTBxczN3YzJhMHp3Yw%3D%3D&utm_source=qr"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-card instagram-card">
+        
+                    <div class="social-icon">◎</div>
+                    <span class="social-name">Instagram</span>
+                    <p>Эстетика, наши работы и новые дизайны.</p>
+                    <span class="social-link">НАШ ПРОФИЛЬ ↗</span>
+        
+                </a>
+        
+                <a href="https://t.me/ayllittocases"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-card telegram-card">
+        
+                    <div class="social-icon">✈</div>
+                    <span class="social-name">Наш Telegram</span>
+                    <p>Новости, обновления и новые коллекции.</p>
+                    <span class="social-link">ПЕРЕЙТИ В КАНАЛ ↗</span>
+        
+                </a>
+        
+                <a href="https://t.me/ayliinkk7"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="social-card order-card">
+        
+                    <div class="social-icon">✉</div>
+                    <span class="social-name">Заказы и вопросы</span>
+                    <p>Напиши нам, чтобы обсудить свой будущий чехол.</p>
+                    <span class="social-link">НАПИСАТЬ НАМ ↗</span>
+        
+                </a>
+        
+            </div>
+        
+            <div class="social-footer">
+                <span></span>
+                <p>Stay connected · AYLITTO CASES</p>
+                <span></span>
+            </div>
+        
+        </section>
+
+
+    </div>
+</div>
+    </div>
+
+    <script>
+        // БАЗА ДАННЫХ ДЛЯ 20 ФЛАГОВ И НАРОДОВ
+        const categories = [
+            { label: "Азербайджан", title: "Чехол с флагом Азербайджана", img: "8.PNG" },
+            { label: "Грузия", title: "Чехол с флагом Грузии", img: "7.PNG" },
+            { label: "Ингушетия", title: "Чехол с флагом Ингушетии", img: "6.PNG" },
+            { label: "Чечня", title: "Чехол с флагом Чечни", img: "5.PNG" },
+            { label: "Армения", title: "Чехол с флагом Армении", img: "4.PNG" },
+            { label: "Греция", title: "Чехол с флагом Греции", img: "3.PNG" },
+            { label: "Дагестан", title: "Чехол с флагом Дагестана", img: "2.PNG" },
+            { label: "Осетия", title: "Чехол с флагом Осетии", img: "1.PNG" },
+            { label: "Казахстан", title: "Чехол с флагом Казахстана", img: "9.jpeg" },
+            { label: "Адыгея", title: "Чехол с флагом Адыгеи", img: "10.jpeg" },
+            { label: "Франция", title: "Чехол с флагом Франции", img: "11.jpeg" },
+            { label: "Таджикистан", title: "Чехол с флагом Таджикистана", img: "12.jpeg" },
+            { label: "Америка", title: "Чехол с флагом Америки", img: "13.jpeg" },
+          
+            { label: "Именной", title: "Чехол с именем стразами напишите нам лично!!!!", img: "19.jpeg" }
+        ];
+
+        const storiesContainer = document.getElementById('stories-list');
+
+        // Создаем элементы сторис
+        categories.forEach((cat, index) => {
+            const item = document.createElement('div');
+            item.className = `story-item ${index === 0 ? 'active' : ''}`;
+            item.onclick = () => selectCategory(index);
+            item.innerHTML = `
+                <div class="story-circle">
+                    <!-- ДОБАВИТЬ КАРТИНКУ: Фото для иконки флага -->
+                    <img src="${cat.img}" alt="${cat.label}">
+                </div>
+                <span class="story-label">${cat.label}</span>
+            `;
+            storiesContainer.appendChild(item);
+        });
+
+        // Функция клика
+        function selectCategory(index) {
+            document.querySelectorAll('.story-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            const data = categories[index];
+            document.getElementById('product-title').innerText = data.title;
+            document.getElementById('product-img').src = data.img;
+            document.getElementById('product-desc').innerText = `Ручная работа. Эксклюзивная инкрустация (${data.label}) премиальными кристаллами.`;
+        }
+    </script>
+    <!-- ЭФФЕКТ МНОЖЕСТВА МАЛЕНЬКИХ ЗВЕЗД ПО БОКАМ -->
+<style>
+    .stars-side-container {
+        position: fixed;
+        top: 0;
+        width: 15vw; /* Ширина зоны со звездами */
+        height: 100vh;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .stars-left { left: 0; }
+    .stars-right { right: 0; }
+
+    .tiny-star {
+        position: absolute;
+        background: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 0 5px #ffffff, 0 0 10px #38bdf8;
+        animation: twinkle var(--speed) infinite ease-in-out;
+        opacity: 0;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.1; transform: scale(0.7); }
+        50% { opacity: 1; transform: scale(1.3); }
+    }
+</style>
+
+<div class="stars-side-container stars-left" id="stars-left"></div>
+<div class="stars-side-container stars-right" id="stars-right"></div>
+
+
+    
+   <!-- ЭФФЕКТ МНОЖЕСТВА МАЛЕНЬКИХ ЗВЕЗД ПО БОКАМ -->
+<style>
+    .stars-side-container {
+        position: fixed;
+        top: 0;
+        width: 15vw; /* Ширина зоны со звездами */
+        height: 100vh;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 1;
+    }
+    .stars-left { left: 0; }
+    .stars-right { right: 0; }
+
+    .tiny-star {
+        position: absolute;
+        background: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 0 5px #ffffff, 0 0 10px #38bdf8;
+        animation: twinkle var(--speed) infinite ease-in-out;
+        opacity: 0;
+    }
+
+    @keyframes twinkle {
+        0%, 100% { opacity: 0.1; transform: scale(0.7); }
+        50% { opacity: 1; transform: scale(1.3); }
+    }
+</style>
+
+<div class="stars-side-container stars-left" id="stars-left"></div>
+<div class="stars-side-container stars-right" id="stars-right"></div>
+
+<!-- ЗВЕЗДЫ ПОВСЮДУ (И НА СЕРЕДИНЕ, И НАД КОНТЕНТОМ) -->
+<style>
+    /* Делаем так, чтобы слой со звездами покрывал абсолютно весь экран */
+    .magic-sky {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        pointer-events: none; /* Чтобы мышка кликала сквозь них */
+        z-index: 999; /* Поверх абсолютно всего */
+    }
+
+    .magic-star {
+        position: absolute;
+        background: #ffffff;
+        border-radius: 50%;
+        box-shadow: 0 0 6px #ffffff, 0 0 12px #38bdf8;
+        animation: magicBlink var(--speed) infinite ease-in-out;
+        opacity: 0;
+    }
+
+    @keyframes magicBlink {
+        0%, 100% { opacity: 0.1; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.4); }
+    }
+</style>
+
+<div class="magic-sky" id="magic-sky-container"></div>
+
+<script>
+    function openTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      contents.forEach(content => content.classList.remove('active'));
+  
+      const buttons = document.querySelectorAll('.tab-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+  
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+    }
+  </script>
+
+
+<script>
+    // Создаем 70 звездочек, которые распределятся по ВСЕЙ ширине экрана от края до края
+    const sky = document.getElementById('magic-sky-container');
+    for (let i = 0; i < 90; i++) {
+        const star = document.createElement('div');
+        star.className = 'magic-star';
+        
+        // Размер от 1.5 до 3.5 пикселей
+        const size = Math.random() * 2 + 1.5;
+        star.style.width = size + 'px';
+        star.style.height = size + 'px';
+        
+        // Рандомно по всей ширине от 0% до 100% (вся середина и бока)
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        
+        // Скорость и задержка мигания
+        const speed = Math.random() * 3 + 2;
+        star.style.setProperty('--speed', speed + 's');
+        star.style.animationDelay = Math.random() * 4 + 's';
+        
+        sky.appendChild(star);
+    }
+</script>
+
+</body>
+</html>
